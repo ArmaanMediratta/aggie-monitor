@@ -1,7 +1,7 @@
 
 # Aggie Class Monitor
 
-Allows students at Texas A&M University to monitor when their classes have seats open.
+Allows students at Texas A&M University to monitor when their classes have seats open. **FOR COLLEGE STATION STUDENTS ONLY**
 ## Getting Started
 
 - [Installation](#Installation)
