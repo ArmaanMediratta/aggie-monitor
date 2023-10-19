@@ -15,7 +15,6 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-
 //monitoring
 async function mainMonitor(crnsToMonitor) {
   const spinner = ora("Monitoring");
@@ -53,7 +52,8 @@ async function mainMonitor(crnsToMonitor) {
 async function getCrnInfo(crn, type) {
   axiosRetry(axios, { retries: 1000, retryDelay: axiosRetry.exponentialDelay });
   return new Promise(async (resolve) => {
-    var link = `https://tamu.collegescheduler.com/api/terms/Fall%202023%20-%20College%20Station/course/section/${crn}`;
+    let currTerm = getCurrCycle();
+    var link = `https://tamu.collegescheduler.com/api/terms/${currTerm[0]}%20${currTerm[1]}%20-%20College%20Station/course/section/${crn}`;
     let config = {
       method: "get",
       maxBodyLength: Infinity,
@@ -81,9 +81,12 @@ async function checkInfo(crnClassType, crnID, type) {
     retries: 1000,
     retryDelay: axiosRetry.exponentialDelay,
   });
-  var link = `https://tamu.collegescheduler.com/api/terms/Fall%202023%20-%20College%20Station/subjects/${
-    crnClassType.split(" ")[0]
-  }/courses/${crnClassType.split(" ")[1]}/regblocks`;
+  let currTerm = getCurrCycle();
+  var link = `https://tamu.collegescheduler.com/api/terms/${currTerm[0]}%20${
+    currTerm[1]
+  }%20-%20College%20Station/subjects/${crnClassType.split(" ")[0]}/courses/${
+    crnClassType.split(" ")[1]
+  }/regblocks`;
   let config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -148,6 +151,18 @@ async function confirmCookies() {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function getCurrCycle() {
+  let currMonth = new Date().getMonth() + 1;
+  let currYear = new Date().getFullYear();
+  if (currMonth > 8) {
+    return ["Spring", currYear + 1];
+  } else if (currMonth > 0 && currMonth < 3) {
+    return ["Spring", currYear];
+  } else {
+    return ["Fall", currYear];
+  }
 }
 
 module.exports = {

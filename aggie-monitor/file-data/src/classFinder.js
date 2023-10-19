@@ -8,7 +8,6 @@ const dateFns = require("date-fns");
 const axiosRetry = require("axios-retry");
 const settings = require("../config/settings.json");
 
-
 let classData;
 const spinner = ora("Loading classes | ETA: 15s");
 
@@ -186,9 +185,12 @@ async function sendNumReq(classAbv) {
 }
 
 async function getClassDetail(classNum) {
-  var link = `https://tamu.collegescheduler.com/api/terms/Fall%202023%20-%20College%20Station/subjects/${
-    classNum.split(" ")[0]
-  }/courses/${classNum.split(" ")[1]}/regblocks`;
+  let currTerm = getCurrCycle();
+  var link = `https://tamu.collegescheduler.com/api/terms/${currTerm[0]}%20${
+    currTerm[1]
+  }%20-%20College%20Station/subjects/${classNum.split(" ")[0]}/courses/${
+    classNum.split(" ")[1]
+  }/regblocks`;
   let config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -232,6 +234,19 @@ function convertTime(time) {
   return `${dteFormat}${ampm}`;
 }
 
+function getCurrCycle() {
+  let currMonth = new Date().getMonth() + 1;
+  let currYear = new Date().getFullYear();
+  if (currMonth > 8) {
+    return ["Spring", currYear + 1];
+  } else if (currMonth > 0 && currMonth < 3) {
+    return ["Spring", currYear];
+  } else {
+    return ["Fall", currYear];
+  }
+}
+
 module.exports = {
-  main, assembleSchedule
+  main,
+  assembleSchedule,
 };
