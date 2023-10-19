@@ -26,7 +26,7 @@ Allows students at Texas A&M University to monitor when their classes have seats
 #### File-data
 File data has two folders, but you only need to worry about one. ![ Folder](https://i.gyazo.com/8dfa7c9dc3b8c6c1213e367910bc0172.png)
 
-##### Config
+##### Config Folder
 - When you open config, you will see a file called "settings.json". DO NOT delete this file. This is where you will enter your tamu username and password
 
 ##### Src
