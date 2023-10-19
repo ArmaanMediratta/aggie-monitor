@@ -6,14 +6,14 @@ Allows students at Texas A&M University to monitor when their classes have seats
 
 - [Installation](#Installation)
 - [How to Use](#How-to-Use)
-  - [Config](###config)
-      - [Auth Details](####auth-details)
-      - [Cookies](####cookies)
-  - [Opening for the First Time](###opening-for-the-first-time)
+  - [Config](#config)
+      - [Auth Details](#auth-details)
+      - [Cookies](#cookies)
+  - [Opening for the First Time](#opening-for-the-first-time)
     - [Generating a Session](#generating-a-session)
-    - [Session Storage](####session-storage)
-  - [Class Search](###class-search)
-  - [Monitor](###monitor)
+    - [Session Storage](#session-storage)
+  - [Class Search](#class-search)
+  - [Monitor](#monitor)
 - [FAQ](#FAQ)
 
 ## Installation
