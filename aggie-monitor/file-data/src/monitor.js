@@ -37,6 +37,9 @@ async function mainMonitor(crnsToMonitor) {
           transporter.sendMail(mailOptions);
           currCrnMonitor = currCrnMonitor.filter((crn) => crn != res[0].id);
         }
+        else{
+            console.log(' ✔️')
+        }
       }
     } else {
       let pid = await login.refreshSession(false);

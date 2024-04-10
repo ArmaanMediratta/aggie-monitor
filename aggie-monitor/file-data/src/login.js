@@ -38,7 +38,7 @@ async function setEntireSession() {
       headless: "new",
       executablePath: executablePath,
       slowMo: 20,
-      userDataDir: `session/${todayDate}-${Date.now()}`,
+      userDataDir: `file-data/session/${todayDate}-${Date.now()}`,
     });
     const pid = browser.process().pid;
     const page = await browser.newPage();
@@ -144,12 +144,12 @@ async function refreshSession(spinStart) {
     spinner.start();
   }
   return new Promise(async (resolve) => {
-    if (fs.existsSync("session") == false) {
+    if (fs.existsSync("../session") == false) {
       spinner.text = "No session folder found, please generate a session";
       spinner.fail();
       resolve(false);
     } else {
-      let browserSession = fs.readdirSync("session", (err) => {});
+      let browserSession = fs.readdirSync("../session", (err) => {});
       if (browserSession.length == 1) {
         const executablePath = await new Promise((resolve) =>
           locateChrome((arg) => resolve(arg))
@@ -158,7 +158,7 @@ async function refreshSession(spinStart) {
           headless: "new",
           executablePath: executablePath,
           slowMo: 20,
-          userDataDir: `session/${browserSession[0]}`,
+          userDataDir: `../session/${browserSession[0]}`,
         });
         const pid = browser.process().pid;
         const page = await browser.newPage();
@@ -233,7 +233,7 @@ async function refreshSession(spinStart) {
             settings.requestToken = requestToken;
             settings.aspNetCookie = aspNetCookie;
             fs.writeFileSync(
-              "./file-data/config/settings.json",
+              "../config/settings.json",
               JSON.stringify(settings, null, 2)
             );
             confirmCookies().then(async (res) => {
