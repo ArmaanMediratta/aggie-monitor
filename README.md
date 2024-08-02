@@ -1,5 +1,5 @@
 
-# Aggie Class Monitor
+# Aggie Class Monitor LITE
 
 Allows students at Texas A&M University to monitor when their classes have seats open. **FOR COLLEGE STATION STUDENTS ONLY**
 ## Getting Started
